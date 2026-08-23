@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>櫻庭露樹の開運ラジオ(仮)</title>
+    <link>https://shunfujiwara9117.github.io/sakuraba-radio</link>
+    <language>ja</language>
+    <description>開運・全捨離・トイレ掃除など、今日から実践できる開運の話をお届けします。</description>
+    <lastBuildDate>Sun, 23 Aug 2026 16:04:54 GMT</lastBuildDate>
+    <atom:link href="https://shunfujiwara9117.github.io/sakuraba-radio/feed.xml" rel="self" type="application/rss+xml"/>
+    <itunes:author></itunes:author>
+    <itunes:summary>開運・全捨離・トイレ掃除など、今日から実践できる開運の話をお届けします。</itunes:summary>
+    <itunes:owner>
+      <itunes:name></itunes:name>
+      <itunes:email></itunes:email>
+    </itunes:owner>
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:category text="Religion &amp; Spirituality">
+      <itunes:category text="Spirituality"/>
+    </itunes:category>
+    <item>
+      <title>配信テスト(削除予定)</title>
+      <description>自動アップロードの検証用エピソードです。検証後に削除されます。</description>
+      <enclosure url="https://shunfujiwara9117.github.io/sakuraba-radio/episodes/2026-08-23-ep002.mp3" length="40586" type="audio/mpeg"/>
+      <guid isPermaLink="false">sakuraba-podcast-20260823160454-002</guid>
+      <pubDate>Sun, 23 Aug 2026 16:04:54 GMT</pubDate>
+      <itunes:duration>5</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+    <item>
+      <title>サンプルエピソード(動作確認用)</title>
+      <description>配信機能の動作確認用サンプルです(テストトーン音声)。</description>
+      <enclosure url="https://shunfujiwara9117.github.io/sakuraba-radio/episodes/2026-08-23-ep001.mp3" length="64618" type="audio/mpeg"/>
+      <guid isPermaLink="false">sakuraba-podcast-20260823160454-001</guid>
+      <pubDate>Sun, 23 Aug 2026 16:04:54 GMT</pubDate>
+      <itunes:duration>8</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+  </channel>
+</rss>
