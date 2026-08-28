@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>番組ページ</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{--bg:#fbf8f1;--card:#fff;--ink:#2b2622;--sub:#6f655a;--line:#e7dfcf;--gold:#b8952e;--gold2:#8f6f14;--red:#b3261e;--ok:#2e7d32}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Meiryo",sans-serif;line-height:1.7;font-size:16px}
+  .wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+  header{display:flex;gap:16px;align-items:center;margin-bottom:8px}
+  header img{width:96px;height:96px;border-radius:12px;object-fit:cover;border:1px solid var(--line);background:#eee}
+  h1{font-size:1.35rem;margin:0 0 4px;line-height:1.35}
+  .author{color:var(--sub);font-size:.9rem}
+  .desc{color:var(--sub);font-size:.95rem;margin:8px 0 18px;white-space:pre-line}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+  .card h2{font-size:1.05rem;margin:0 0 10px;border-left:4px solid var(--gold);padding-left:10px}
+  .ep{padding:12px 0;border-top:1px solid var(--line)}
+  .ep:first-of-type{border-top:0;padding-top:0}
+  .ep h3{font-size:1rem;margin:0 0 4px}
+  .ep .meta{color:var(--sub);font-size:.82rem}
+  .ep p{margin:6px 0 8px;font-size:.92rem;white-space:pre-line}
+  audio{width:100%;margin-top:4px}
+  .rss{display:flex;gap:8px;align-items:stretch;margin:8px 0}
+  .rss input{flex:1;min-width:0;font-size:.85rem;padding:10px;border:1px solid var(--line);border-radius:8px;background:#faf7f0;color:var(--ink)}
+  .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:0;background:var(--gold2);color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .btn.sub{background:#fff;color:var(--gold2);border:1px solid var(--gold2)}
+  .note{font-size:.88rem;color:var(--sub);margin:6px 0 0}
+  .warn{background:#fff6f5;border:1px solid #f1c9c5;color:var(--red);border-radius:8px;padding:10px 12px;font-size:.9rem;margin-top:10px}
+  ol{padding-left:1.3em;margin:6px 0}
+  ol li{margin:4px 0;font-size:.93rem}
+  .copied{color:var(--ok);font-size:.85rem;margin-left:6px}
+  .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  #status{color:var(--sub);font-size:.9rem}
+  footer{color:var(--sub);font-size:.78rem;text-align:center;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img id="cover" alt="" hidden>
+    <div>
+      <h1 id="title">番組を読み込んでいます…</h1>
+      <div class="author" id="author"></div>
+    </div>
+  </header>
+  <div class="desc" id="desc"></div>
+
+  <div class="card">
+    <h2>エピソード</h2>
+    <div id="episodes"><span id="status">読み込み中…</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Spotify / Apple Podcasts で聴けるようにする(登録は最初の1回だけ)</h2>
+    <p class="note">下の「RSSのURL」は、Spotify や Apple の登録画面に<strong>貼り付けるための住所</strong>です。
+      ブラウザで開くものではありません(開くと文字だらけの画面になりますが、故障ではありません)。</p>
+    <div class="rss">
+      <input type="text" id="rssUrl" readonly>
+      <button type="button" class="btn" id="copyBtn">コピー</button>
+    </div>
+    <span class="copied" id="copied" hidden>✓ コピーしました</span>
+    <div class="links">
+      <a class="btn sub" href="https://creators.spotify.com" target="_blank" rel="noopener">Spotify for Creators を開く</a>
+      <a class="btn sub" href="https://podcastsconnect.apple.com" target="_blank" rel="noopener">Apple Podcasts Connect を開く</a>
+    </div>
+    <p class="note" style="margin-top:12px"><strong>Spotify:</strong></p>
+    <ol>
+      <li>上のボタンで Spotify for Creators を開き、Spotify アカウントでログインします</li>
+      <li>「番組を追加」→「RSSフィードで配信(既存のポッドキャストを追加)」を選びます</li>
+      <li>「コピー」した RSS の URL を貼り付けます</li>
+      <li>番組設定のメールアドレスに届く認証コードを入力し、内容を確認して送信します</li>
+    </ol>
+    <p class="note"><strong>Apple Podcasts:</strong></p>
+    <ol>
+      <li>上のボタンで Apple Podcasts Connect を開き、Apple ID でサインインします</li>
+      <li>「+」→「RSSフィードのある番組を追加」を選びます</li>
+      <li>「コピー」した RSS の URL を貼り付けて「追加」→「審査用に提出」します</li>
+    </ol>
+    <p class="note">一度登録すれば、以後は新しいエピソードが自動で配信されます。</p>
+  </div>
+
+  <footer>このページはアプリの「配信を更新」で自動的に最新になります。反映まで数十秒〜数分かかることがあります。</footer>
+</div>
+
+<script>
+(function(){
+  var feedUrl = new URL("feed.xml", location.href).href;
+  var rssInput = document.getElementById("rssUrl");
+  rssInput.value = feedUrl;
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var done = function(){ var c=document.getElementById("copied"); c.hidden=false; setTimeout(function(){c.hidden=true;},2500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(feedUrl).then(done, function(){ rssInput.select(); document.execCommand("copy"); done(); });
+    } else { rssInput.select(); document.execCommand("copy"); done(); }
+  });
+
+  function text(node, sel){ var el = node && node.querySelector(sel); return el ? el.textContent : ""; }
+  function fmtDate(s){ var d = new Date(s); if (isNaN(d)) return s || ""; return d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日"; }
+  function fmtDur(sec){ sec = parseInt(sec,10); if (!sec) return ""; var m=Math.floor(sec/60), s=sec%60; return m+"分"+(s<10?"0":"")+s+"秒"; }
+
+  fetch(feedUrl, {cache:"no-store"}).then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); })
+  .then(function(xmlText){
+    var doc = new DOMParser().parseFromString(xmlText, "application/xml");
+    var ch = doc.querySelector("channel");
+    if (!ch) throw new Error("feed parse error");
+    var title = text(ch, "channel > title") || "番組";
+    document.title = title;
+    document.getElementById("title").textContent = title;
+    var author = ch.getElementsByTagNameNS("http://www.itunes.com/dtds/podcast-1.0.dtd","author")[0];
+    document.getElementById("author").textContent = author ? author.textContent : "";
+    document.getElementById("desc").textContent = text(ch, "channel > description");
+    var img = ch.getElementsByTagNameNS("http://www.itunes.com/dtds/podcast-1.0.dtd","image")[0];
+    if (img && img.getAttribute("href")) { var c=document.getElementById("cover"); c.src=img.getAttribute("href"); c.hidden=false; }
+
+    var items = Array.prototype.slice.call(ch.querySelectorAll("item"));
+    var box = document.getElementById("episodes");
+    box.innerHTML = "";
+    if (!items.length) { box.innerHTML = '<span id="status">まだエピソードはありません。アプリでエピソードを追加して「配信を更新」を押してください。</span>'; return; }
+    items.forEach(function(it){
+      var div = document.createElement("div"); div.className = "ep";
+      var h = document.createElement("h3"); h.textContent = text(it, "title"); div.appendChild(h);
+      var meta = document.createElement("div"); meta.className="meta";
+      var dur = it.getElementsByTagNameNS("http://www.itunes.com/dtds/podcast-1.0.dtd","duration")[0];
+      meta.textContent = fmtDate(text(it,"pubDate")) + (dur ? "　" + fmtDur(dur.textContent) : "");
+      div.appendChild(meta);
+      var p = document.createElement("p"); p.textContent = text(it, "description"); div.appendChild(p);
+      var enc = it.querySelector("enclosure");
+      if (enc && enc.getAttribute("url")) { var a=document.createElement("audio"); a.controls=true; a.preload="none"; a.src=enc.getAttribute("url"); div.appendChild(a); }
+      box.appendChild(div);
+    });
+  }).catch(function(e){
+    document.getElementById("title").textContent = "番組情報を読み込めませんでした";
+    document.getElementById("episodes").innerHTML = '<span id="status">しばらくしてから再読み込みしてください('+e.message+')</span>';
+  });
+})();
+</script>
+</body>
+</html>
